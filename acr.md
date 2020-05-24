@@ -3,9 +3,24 @@
 az acr create --resource-group learn-deploy-acr-rg --name $ACR_NAME --sku Premium
 ```
 
+### List admin credentials 
+```
+az acr credential show --name $ACR_NAME
+```
+
+### Login to ACR
+```
+docker login myregistry.azurecr.io
+```
+
 ### Buid image
 ```
 az acr build --registry $ACR_NAME --image <docker file path>
+```
+
+### Push an image to ACR
+```
+docker push myregistry.azurecr.io/myapp:v1
 ```
 
 ### List ACR images
@@ -13,14 +28,14 @@ az acr build --registry $ACR_NAME --image <docker file path>
 az acr repository list --name $ACR_NAME --output table
 ```
 
+### List the images in the registry
+```
+az acr repository show --repository myapp --name myregistry
+```
+
 ### Enable the registry admin account
 ```
 az acr update -n $ACR_NAME --admin-enabled true
-```
-
-### List admin credentials 
-```
-az acr credential show --name $ACR_NAME
 ```
 
 ### Deploy a container with Azure CLI
