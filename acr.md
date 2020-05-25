@@ -8,9 +8,19 @@ az acr create --resource-group learn-deploy-acr-rg --name <container_registry_na
 az acr credential show --name <container_registry_name>
 ```
 
+### Service principal 
+```
+az ad sp create-for-rbac --name http://<service principal name> --scopes <acr id> --role acrpull
+```
+
 ### Login to ACR
 ```
 docker login <container_registry_name>.azurecr.io
+```
+
+### Create an image
+```
+az container create --resource-group <rg name> --name <container name> --image <tag> --cpu 1 --memory 1 --registry-login-server <acr server url> --registry-username <service principal username> --registry-password <service principal password> --dns-name-label <app dns name> --ports 80
 ```
 
 ### Buid image
