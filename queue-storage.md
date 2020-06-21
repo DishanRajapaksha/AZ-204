@@ -1,3 +1,5 @@
+[Azure Samppes](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/storage/Azure.Storage.Queues/samples)
+[Documentation](https://docs.microsoft.com/en-us/azure/storage/queues/storage-queues-introduction)
 ```
 dotnet add package WindowsAzure.Storage
 ```
