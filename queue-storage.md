@@ -139,7 +139,7 @@ if (queueClient.Exists())
 }
 ```
 
-### Peeek
+### Peek
 ```
 // Get the connection string from app settings
 string connectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
