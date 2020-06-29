@@ -65,3 +65,36 @@ az storage blob delete \
   --container sourceContainer \
   --name sourceBlob
 ```
+
+### Moving files
+#### Create a CloudBlobClient reference for each account
+#### Create a reference for each container
+#### Create a reference for each blob item
+#### Use destination blob item to do the copy operation
+#### Delete the source blob item
+
+```
+//Get a cloud client for the source Storage Account             
+CloudBlobClient sourceClient = Common.CreateBlobClientStorageFromSAS(appSettings.SourceSASToken, appSettings.SourceAccountName);             
+
+//Get a reference for each container             
+var sourceContainerReference = sourceClient.GetContainerReference(appSettings.SourceContainerName);             
+var destinationContainerReference = sourceClient.GetContainerReference(appSettings.DestinationContainerName);             
+
+//Get a reference for the source blob             
+var sourceBlobReference = sourceContainerReference.GetBlockBlobReference(sourceBlobFileName);             
+var destinationBlobReference = destinationContainerReference.GetBlockBlobReference(sourceBlobFileName);             
+
+//Move the blob from the source container to the destination container
+await destinationBlobReference.StartCopyingAsync(sourceBlobReference);
+
+await sourceBlobReference.DeleteAsync();
+```
+
+```
+//You need to fetch the container properties before getting their values             
+container.FetchAttributes();
+
+//Add some metadata to the container that we created before             
+container.Metadata.Add("department", "Technical");
+```
